@@ -53,7 +53,6 @@ class MainWindow(QMainWindow):
                satir = satir.replace("tel:", "")
                if not satir.startswith('+'):
                    satir = '+' + satir
-                   print(satir)
                tel = satir.strip().replace("'", "")
                set2.add(tel)
 
@@ -69,7 +68,6 @@ class MainWindow(QMainWindow):
            print("\n")
            for tel in kesisim:
                grpno = dict1[tel]  # dictionary kullanarak ilgili tel değerine ait grpno değerini alın
-               print(f"tel:{tel}, GRPNO:{grpno}")
                f = open("callgrppsi_output.txt", "a")
                f.write("\n"f'ADD CALLGRPPSI:PSI="tel:{tel}",GRPNO="{grpno}";')
                f.close()
