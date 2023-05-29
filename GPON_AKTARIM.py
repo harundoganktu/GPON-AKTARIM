@@ -9,8 +9,6 @@ import os
 from datetime import datetime
 #######################################################################################################################
 
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -37,13 +35,6 @@ class MainWindow(QMainWindow):
     def pss587(self):
        file_path1, _ = QFileDialog.getOpenFileName(self, "Open 587_PSS_CALLGRP_PSI file", os.path.expanduser("~"),"587_PSS_CALLGRP_PSI files (*.txt)")
        self.lineEdit_2.setText(file_path1)
-
-       with open(file_path1) as f:
-           for satir in f:
-               satir = satir.replace("x80", "")
-               veriler = satir.split(",")
-               tel = veriler[0].replace("tel:", "").replace("'", "")
-               grpno = veriler[1].replace("'", "")
 
        with open(file_path1) as f1, open(self.result1) as f2:
            dict1 = {}
@@ -130,8 +121,11 @@ class MainWindow(QMainWindow):
             0: "NO",
         }
         ############################################################################################################
-        with open(file_path3) as f:
-            for satir in f:
+
+        with open(file_path3) as f1, open(self.result2) as f2:
+            dict1 = {}
+            set2 = set()
+            for satir in f1:
                 satir = satir.replace("x80", "")
                 veriler = satir.split(",")
                 grpno = veriler[0].replace("'", "")
@@ -148,13 +142,6 @@ class MainWindow(QMainWindow):
                 CALLERQUEUE = veriler[13].replace("'", "")
                 VIRNUMBER = veriler[14].replace("'", "")
                 TRIGSPECFORWARD = veriler[15].replace("'", "")
-
-        with open(file_path3) as f1, open(self.result2) as f2:
-            dict1 = {}
-            set2 = set()
-
-            for satir in f1:
-                NAME = veriler[4].replace("tel:", "").replace("'", "")
                 if not NAME.startswith('+'):
                     NAME = '+' + NAME
                 dict1[NAME] = (grpno, selmode, Maxnum, DISPLOT, NONPILOT, MAXRINGNUM, NONPILSELMOD, CHARGPILOT, TRIGSPECFORWARD)
@@ -164,7 +151,6 @@ class MainWindow(QMainWindow):
                 satir = satir.replace("tel:", "")
                 if not satir.startswith('+'):
                     satir = '+' + satir
-                print(satir)
                 NAME = satir.strip().replace("'", "")
                 set2.add(NAME)
 
@@ -206,6 +192,6 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWindow = MainWindow()  # veya mainWindow.setGeometry(100, 100, 800, 600)
+    mainWindow = MainWindow() 
     mainWindow.show()
     sys.exit(app.exec_())
