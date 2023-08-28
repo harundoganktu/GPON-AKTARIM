@@ -138,19 +138,6 @@ class MainWindow(QMainWindow):
                 NAME = NAME.replace("tel", "")
                 NAME = NAME.replace("sip:", "")
                 NAME = NAME.replace("el:", "")
-                if NAME.startswith(''):
-                        print(NAME)
-                        dict2[NAME] = (grpno, selmode, Maxnum, DISPLOT, NONPILOT, MAXRINGNUM, NONPILSELMOD, CHARGPILOT,TRIGSPECFORWARD)
-                        grpno, selmode, Maxnum, DISPILOT, NONPILOT, MAXRINGNUM, NONPILSELMOD, CHARGPILOT, TRIGSPECFORWARD = dict2[NAME]
-                        selmode_str = selmode_macros.get(selmode, "Unknown")
-                        DISPILOT_str = DISPILOT_macros.get(DISPILOT, "Unknown")
-                        NONPILOT_str = NONPILOT_macros.get(NONPILOT, "Unknown")
-                        NONPILSELMOD_str = NONPILSELMOD_macros.get(NONPILSELMOD, "Unknown")
-                        CHARGPILOT_str = CHARGPILOT_macros.get(CHARGPILOT, "Unknown")
-                        TRIGSPECFORWARD_int = TRIGSPECFORWARD_macros.get(int(TRIGSPECFORWARD), "Unknown")
-                        f = open("call_group_cmd_output_NAME_NULL.txt", "a")
-                        f.write("\n"f'ADD CALLGROUP:GRPNO="{grpno}",NAME="{NAME}",SELMODE="{selmode_str}",MAXNUM="{Maxnum}",MAXRINGNUM={MAXRINGNUM},DISPILOT="{DISPILOT_str}",NONPILOT="{NONPILOT_str}",NONPILSELMOD="{NONPILSELMOD_str}",CHARGPILOT="{CHARGPILOT_str}",TRIGSPECFORWARD="{TRIGSPECFORWARD_int}";')
-                        f.close()
                 if not NAME.startswith('+'):
                     NAME = '+' + NAME
                 digitler2 = NAME[3:6]
